@@ -8,8 +8,14 @@
   </parent>
   
   <artifactId>script-realm</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
   <packaging>hpi</packaging>
   <name>Security Realm by custom script</name>
   <url>http://wiki.hudson-ci.org/display/HUDSON/Script+Security+Realm</url>
+
+  <scm>
+    <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/tags/script-realm-1.1</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/script-realm-1.1</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/tags/script-realm-1.1</url>
+  </scm>
 </project>
