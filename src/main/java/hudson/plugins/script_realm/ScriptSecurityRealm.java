@@ -26,6 +26,7 @@ package hudson.plugins.script_realm;
 import hudson.Extension;
 import hudson.Launcher.LocalLauncher;
 import hudson.model.Descriptor;
+import hudson.model.TaskListener;
 import hudson.security.AbstractPasswordBasedSecurityRealm;
 import hudson.security.GroupDetails;
 import hudson.security.SecurityRealm;
@@ -38,6 +39,7 @@ import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.userdetails.User;
 import org.acegisecurity.userdetails.UserDetails;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
+import org.apache.commons.io.output.NullOutputStream;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.springframework.dao.DataAccessException;
 
@@ -59,7 +61,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
         try {
             StringWriter out = new StringWriter();
             LocalLauncher launcher = new LocalLauncher(new StreamTaskListener(out));
-            if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine))
+            if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine)).stdout(new NullOutputStream())
                     .envs("U="+username,"P="+password).join()!=0)
                 throw new BadCredentialsException(out.toString());
 
