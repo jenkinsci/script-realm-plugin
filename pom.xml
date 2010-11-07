@@ -11,5 +11,6 @@
   <version>1.2-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>Security Realm by custom script</name>
+  <description>Supports authentication by exeuting a custom script, to resolve groups for a user, a second script can be defined.</description>
   <url>http://wiki.hudson-ci.org/display/HUDSON/Script+Security+Realm</url>
 </project>

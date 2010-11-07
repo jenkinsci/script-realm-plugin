@@ -8,12 +8,12 @@ import org.jvnet.hudson.test.HudsonTestCase;
  */
 public class ScriptSecurityRealmTest extends HudsonTestCase {
     public void test1() {
-        new ScriptSecurityRealm("/bin/true").authenticate("test","test");
+        new ScriptSecurityRealm("/bin/true", null, null).authenticate("test","test");
     }
 
     public void test2() {
         try {
-            new ScriptSecurityRealm("/bin/false").authenticate("test","test");
+            new ScriptSecurityRealm("/bin/false", null, null).authenticate("test","test");
             fail();
         } catch (AuthenticationException e) {
             // as expected

@@ -22,7 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <f:entry title="${%Command}">
+  <f:entry title="${%Login Command}">
     <f:textbox field="commandLine" />
+  </f:entry>
+  <f:entry title="${%Groups Command}" help="/plugin/script-realm/help-groupsCommandLine.html">
+    <f:textbox field="groupsCommandLine" />
+  </f:entry>
+  <f:entry title="${%Groups Delimiter}" help="/plugin/script-realm/help-groupsDelimiter.html">
+    <f:textbox field="groupsDelimiter" default="," />
   </f:entry>
 </j:jelly>
