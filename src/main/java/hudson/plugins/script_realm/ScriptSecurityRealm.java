@@ -120,7 +120,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 			authorities.add(AUTHENTICATED_AUTHORITY);
 			if (!StringUtils.isBlank(groupsCommandLine)) {
 				StringWriter out = new StringWriter();
-				LocalLauncher launcher = new LocalLauncher(new StreamTaskListener(out));
+				LocalLauncher launcher = new LoginScriptLauncher(new StreamTaskListener(out));
 				OutputStream scriptOut = new ByteArrayOutputStream();
 				if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(groupsCommandLine)).stdout(scriptOut).envs("U=" + username).join() == 0) {
 					StringTokenizer tokenizer = new StringTokenizer(scriptOut.toString().trim(), groupsDelimiter);
