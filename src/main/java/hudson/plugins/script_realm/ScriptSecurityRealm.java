@@ -79,7 +79,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 	protected UserDetails authenticate(String username, String password) throws AuthenticationException {
 		try {
 			StringWriter out = new StringWriter();
-			LocalLauncher launcher = new LocalLauncher(new StreamTaskListener(out));
+			LocalLauncher launcher = new LoginScriptLauncher(new StreamTaskListener(out));
 			if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine)).stdout(new NullOutputStream()).envs("U=" + username, "P=" + password)
 					.join() != 0) {
 				throw new BadCredentialsException(out.toString());
