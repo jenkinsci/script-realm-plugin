@@ -54,7 +54,7 @@
 		<snapshotRepository>
 			<!-- prevent accidental deployment of SNAPSHOTS to repository -->
 			<id>local.repository</id>
-			<url>file:.</url>
+			<url>file:/tmp/dummy-repo</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
