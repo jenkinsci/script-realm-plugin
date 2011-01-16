@@ -41,9 +41,9 @@
 		<!-- </extensions> -->
 	</build>
 	<scm>
-		<connection>scm:git:git://github.com/imdo/script-realm-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:imdo/script-realm-plugin.git</developerConnection>
-		<url>http://github.com/imdo/script-realm-plugin</url>
+		<connection>scm:git:git://github.com/imod/script-realm-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:imod/script-realm-plugin.git</developerConnection>
+		<url>http://github.com/imod/script-realm-plugin</url>
 	</scm>
 	<distributionManagement>
 		<repository>
