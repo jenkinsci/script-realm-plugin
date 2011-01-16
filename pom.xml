@@ -8,7 +8,7 @@
 	</parent>
 
 	<artifactId>script-realm</artifactId>
-	<version>1.3</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 	<name>Security Realm by custom script</name>
 	<description>Supports authentication by exeuting a custom script, to resolve groups for a user, a second script can be defined.</description>
