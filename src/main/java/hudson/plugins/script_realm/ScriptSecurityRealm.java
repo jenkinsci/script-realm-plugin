@@ -36,7 +36,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,7 +82,13 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 		try {
 			StringWriter out = new StringWriter();
 			LocalLauncher launcher = new LoginScriptLauncher(new StreamTaskListener(out));
-			if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine)).stdout(new NullOutputStream()).envs("U=" + username, "P=" + password)
+			Map<String,String> overrides = new HashMap<String, String>();
+			overrides.put("U", username);
+			overrides.put("P", password);
+			if (System.getProperty("os.name").toLowerCase().contains("win")) {
+				overrides.put("SystemRoot", System.getenv("SystemRoot"));
+			}
+			if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine)).stdout(new NullOutputStream()).envs(overrides)
 					.join() != 0) {
 				throw new BadCredentialsException(out.toString());
 			}
