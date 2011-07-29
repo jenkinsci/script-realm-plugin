@@ -82,14 +82,13 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 		try {
 			StringWriter out = new StringWriter();
 			LocalLauncher launcher = new LoginScriptLauncher(new StreamTaskListener(out));
-			Map<String,String> overrides = new HashMap<String, String>();
+			Map<String, String> overrides = new HashMap<String, String>();
 			overrides.put("U", username);
 			overrides.put("P", password);
-			if (System.getProperty("os.name").toLowerCase().contains("win")) {
+			if (isWindows()) {
 				overrides.put("SystemRoot", System.getenv("SystemRoot"));
 			}
-			if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine)).stdout(new NullOutputStream()).envs(overrides)
-					.join() != 0) {
+			if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine)).stdout(new NullOutputStream()).envs(overrides).join() != 0) {
 				throw new BadCredentialsException(out.toString());
 			}
 			GrantedAuthority[] groups = loadGroups(username);
@@ -129,8 +128,13 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 			if (!StringUtils.isBlank(groupsCommandLine)) {
 				StringWriter out = new StringWriter();
 				LocalLauncher launcher = new LoginScriptLauncher(new StreamTaskListener(out));
+				Map<String, String> overrides = new HashMap<String, String>();
+				overrides.put("U", username);
+				if (isWindows()) {
+					overrides.put("SystemRoot", System.getenv("SystemRoot"));
+				}
 				OutputStream scriptOut = new ByteArrayOutputStream();
-				if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(groupsCommandLine)).stdout(scriptOut).envs("U=" + username).join() == 0) {
+				if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(groupsCommandLine)).stdout(scriptOut).envs(overrides).join() == 0) {
 					StringTokenizer tokenizer = new StringTokenizer(scriptOut.toString().trim(), groupsDelimiter);
 					while (tokenizer.hasMoreTokens()) {
 						final String token = tokenizer.nextToken().trim();
@@ -149,5 +153,10 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 		} catch (IOException e) {
 			throw new AuthenticationServiceException("Failed", e);
 		}
+	}
+
+	public boolean isWindows() {
+		String os = System.getProperty("os.name").toLowerCase();
+		return os.contains("win");
 	}
 }
