@@ -12,7 +12,7 @@
 	<packaging>hpi</packaging>
 	<name>Security Realm by custom script</name>
 	<description>Supports authentication by exeuting a custom script, to resolve groups for a user, a second script can be defined.</description>
-	<url>http://wiki.hudson-ci.org/display/HUDSON/Script+Security+Realm</url>
+	<url>https://wiki.jenkins-ci.org/display/JENKINS/Script+Security+Realm</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -36,9 +36,9 @@
 		</plugins>
 	</build>
 	<scm>
-		<connection>scm:git:git://github.com/hudson/script-realm-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:hudson/script-realm-plugin.git</developerConnection>
-		<url>http://github.com/hudson/script-realm-plugin</url>
+		<connection>scm:git:git://github.com/jenkins/script-realm-plugin.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/jenkinsci/script-realm-plugin.git</developerConnection>
+		<url>http://github.com/jenkins/script-realm-plugin</url>
 	</scm>
 	<distributionManagement>
 		<repository>
