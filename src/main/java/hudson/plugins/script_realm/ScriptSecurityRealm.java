@@ -144,7 +144,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 					}
 
 				} else {
-					throw new BadCredentialsException(out.toString());
+					throw new UsernameNotFoundException(out.toString());
 				}
 			}
 			return authorities.toArray(new GrantedAuthority[0]);
