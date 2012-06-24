@@ -35,6 +35,13 @@
 			</plugin>
 		</plugins>
 	</build>
+    <developers>
+        <developer>
+            <id>imod</id>
+            <name>Dominik Bartholdi</name>
+            <email>-</email>
+        </developer>
+    </developers>	
 	<scm>
 		<connection>scm:git:git://github.com/jenkins/script-realm-plugin.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/jenkinsci/script-realm-plugin.git</developerConnection>
