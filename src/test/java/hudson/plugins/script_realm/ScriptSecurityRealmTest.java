@@ -28,7 +28,7 @@ public class ScriptSecurityRealmTest extends HudsonTestCase {
 	}
 
 	public void test1() {
-		UserDetails user = new ScriptSecurityRealm(trueScript.getAbsolutePath(), null, null).authenticate("test", "test");
+		UserDetails user = new ScriptSecurityRealm(trueScript.getAbsolutePath(), null, null, null, null).authenticate("test", "test");
 		System.out.println("**-->" + user);
 		assertTrue("user account not enabled", user.isEnabled());
 		assertTrue("user credentials expired", user.isCredentialsNonExpired());
@@ -38,7 +38,7 @@ public class ScriptSecurityRealmTest extends HudsonTestCase {
 
 	public void test2() {
 		try {
-			new ScriptSecurityRealm(falseScript.getAbsolutePath(), null, null).authenticate("test", "test");
+			new ScriptSecurityRealm(falseScript.getAbsolutePath(), null, null, null, null).authenticate("test", "test");
 			fail();
 		} catch (AuthenticationException e) {
 			// as expected
