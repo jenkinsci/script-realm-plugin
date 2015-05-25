@@ -1,4 +1,4 @@
 <div>
   This plugin adds authentication and groups resolving via user-defined script.
-  In addition to the original script-realm, this one also supports e-mail and name resolving through the use of existing plugins.
+  It also supports e-mail and name resolving through the use of existing plugins.
 </div>

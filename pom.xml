@@ -6,11 +6,11 @@
 	   <version>1.566</version>
 	</parent>
 
-	<artifactId>script-realm-modular</artifactId>
+	<artifactId>script-realm</artifactId>
 	<version>1.6-SNAPSHOT</version>
 	<packaging>hpi</packaging>
-	<name>Security Realm by custom script using modular resolvers</name>
-	<description>Supports authentication by custom script, groups resolving for a user, and triggers e-mail and name resolvers.</description>
+	<name>Security Realm by custom script</name>
+	<description>Supports authentication by custom script, groups resolving for a user, and triggers e-mail and full name resolvers.</description>
 	<url>https://wiki.jenkins-ci.org/display/JENKINS/Script+Security+Realm</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,7 +50,7 @@
 		<developer>
 			<id>nicobo</id>
 			<name>Nicolas BONARDELLE</name>
-			<url>http://nicolabs.xyz/people/nicobo</url>
+			<url>http://nicolabs.net/contact</url>
 		</developer>
     </developers>	
 	<scm>
