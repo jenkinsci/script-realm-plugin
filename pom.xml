@@ -7,7 +7,7 @@
 	</parent>
 
 	<artifactId>script-realm</artifactId>
-	<version>1.6-SNAPSHOT</version>
+	<version>1.6-emailfullnameresolvers-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 	<name>Security Realm by custom script</name>
 	<description>Supports authentication by custom script, groups resolving for a user, and triggers e-mail and full name resolvers.</description>
