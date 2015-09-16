@@ -1,0 +1,16 @@
+<div>
+  Délègue l'authentification à un script.
+  Cela permet par ex. de se connecter à un mécanisme d'authentification non standard.
+</div>
+
+  <p>
+  A chaque tentative d'authentification (c.a.d. une fois par session),
+  le script spécifié sera invoqué et recevra l'identifiant dans la variable d'environnement 'U'
+  et le mot de passe dans la variable d'environnement 'P'.
+  L'authentification est considérée réussie si le processus sort avec le statut 0, 
+  sinon elle est considérée en échec.
+  </p>
+
+  <p>
+  En cas d'échec, le texte affiché par le script sera rapporté dans le message d'erreur.
+  </p>

@@ -1,0 +1,13 @@
+<div>
+  Délègue la résolution des groupes à un script.
+  
+  <p>
+  A chaque tentative d'authentification, ce script sera invoqué et recevra l'identifiant dans la variable d'environnement 'U'.
+  Si le processus sort avec le statut 0, sa sortie standard sera interprétée comme l'ensemble des groupes
+  de l'utilisateur, séparés par le délimiteur (défaut: ','). 
+  </p>
+
+  <p>
+  En cas d'échec, le texte affiché par le script sera rapporté dans le message d'erreur.
+  </p>
+</div>
