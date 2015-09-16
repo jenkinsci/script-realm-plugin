@@ -7,11 +7,11 @@
 	</parent>
 
 	<artifactId>script-realm</artifactId>
-	<version>1.6-emailfullnameresolvers-SNAPSHOT</version>
+	<version>1.6-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 	<name>Security Realm by custom script</name>
 	<description>Supports authentication by custom script, groups resolving for a user, and triggers e-mail and full name resolvers.</description>
-	<url>https://github.com/nicolabs/script-realm-plugin</url>
+	<url>https://wiki.jenkins-ci.org/display/JENKINS/Script+Security+Realm</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -47,16 +47,11 @@
             <name>Dominik Bartholdi</name>
             <email>-</email>
         </developer>
-		<developer>
-			<id>nicobo</id>
-			<name>Nicolas BONARDELLE</name>
-			<url>http://nicolabs.net/contact</url>
-		</developer>
     </developers>	
 	<scm>
-		<connection>scm:git:git://github.com/nicolabs/script-realm-plugin.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/nicolabs/script-realm-plugin.git</developerConnection>
-		<url>https://github.com/nicolabs/script-realm-plugin</url>
+		<connection>scm:git:git://github.com/jenkins/script-realm-plugin.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/jenkinsci/script-realm-plugin.git</developerConnection>
+		<url>http://github.com/jenkins/script-realm-plugin</url>
 	</scm>
 	<distributionManagement>
         <repository>

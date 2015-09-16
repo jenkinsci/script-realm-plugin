@@ -72,7 +72,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 	private static final Logger LOGGER = Logger.getLogger(ScriptSecurityRealm.class.getName());
 
 	/** Strategy : call the global resolve method (let Jenkins choose) */
-	private static final String OPTION_RESOLVER_DEFAULTSTRATEGY = "*";
+	private static final String OPTION_RESOLVER_ANYSTRATEGY = "*";
 	/** Strategy : don't resolve */
 	private static final String OPTION_RESOLVER_NONESTRATEGY = "";
 
@@ -150,19 +150,19 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 		}
 
 		public String getDefaultEmailResolver() {
-			return OPTION_RESOLVER_DEFAULTSTRATEGY;
+			return OPTION_RESOLVER_NONESTRATEGY;
 		}
 
 		public String getDefaultNameResolver() {
-			return OPTION_RESOLVER_DEFAULTSTRATEGY;
+			return OPTION_RESOLVER_NONESTRATEGY;
 		}
 
 		public ListBoxModel doFillEmailResolverItems() {
             ListBoxModel items = new ListBoxModel();
             ExtensionList<MailAddressResolver> mars = MailAddressResolver.all();
-            items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_defaultstrategy_label(),OPTION_RESOLVER_DEFAULTSTRATEGY));	// This entry will use Jenkins's default behavior (calling all found resolvers)
+            items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));	// This entry will disable resolving if selected
             if ( ! mars.isEmpty() ) {
-                items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));	// This entry will disable resolving if selected
+                items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_anystrategy_label(),OPTION_RESOLVER_ANYSTRATEGY));	// This entry will use Jenkins's default behavior (calling all found resolvers)
 	            // Adds all found e-mail resolvers as options so the user can select one of them
 	            for (MailAddressResolver mar : mars) {
 	            	// class name is used both as label and value
@@ -175,9 +175,9 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 		public ListBoxModel doFillNameResolverItems() {
             ListBoxModel items = new ListBoxModel();
             ExtensionList<UserNameResolver> unrs = UserNameResolver.all();
-            items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_defaultstrategy_label(),OPTION_RESOLVER_DEFAULTSTRATEGY));	// This entry will use Jenkins's default behavior (calling all found resolvers)
+            items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));	// This entry will disable resolving if selected
             if ( ! unrs.isEmpty() ) {
-                items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));	// This entry will disable resolving if selected
+                items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_anystrategy_label(),OPTION_RESOLVER_ANYSTRATEGY));	// This entry will use Jenkins's default behavior (calling all found resolvers)
 	            // Adds all found name resolvers as options so the user can select one of them
 	            for (UserNameResolver unr : unrs) {
 	            	// class name is used both as label and value
@@ -233,7 +233,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 
         if ( !OPTION_RESOLVER_NONESTRATEGY.equals(nameResolver) ) {
         	String fullname = null;
-        	if ( OPTION_RESOLVER_DEFAULTSTRATEGY.equals(nameResolver) ) {
+        	if ( OPTION_RESOLVER_ANYSTRATEGY.equals(nameResolver) ) {
         		LOGGER.log(Level.FINE,"Calling any registered UserNameResolver for {0}",new Object[]{user});
         		fullname = UserNameResolver.resolve(user);
         	} else {
@@ -260,7 +260,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
             Mailer.UserProperty existing = user.getProperty(Mailer.UserProperty.class);
             if (existing==null || !existing.hasExplicitlyConfiguredAddress()) {
 	        	String email = null;
-	        	if ( OPTION_RESOLVER_DEFAULTSTRATEGY.equals(emailResolver) ) {
+	        	if ( OPTION_RESOLVER_ANYSTRATEGY.equals(emailResolver) ) {
 	        		LOGGER.log(Level.FINE,"Calling any registered MailAddressResolver for {0}",new Object[]{user});
 	        		email = MailAddressResolver.resolve(user);
 	        	} else {
