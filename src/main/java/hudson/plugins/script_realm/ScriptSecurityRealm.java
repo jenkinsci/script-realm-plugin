@@ -71,11 +71,10 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 
 	private static final Logger LOGGER = Logger.getLogger(ScriptSecurityRealm.class.getName());
 
-	/** Strategy : call the global resolve method (let Jenkins choose) */
+	/** Strategy : call the global <tt>resolve</tt> method (use Jenkins's default behavior, i.e. calling all found resolvers) */
 	private static final String OPTION_RESOLVER_ANYSTRATEGY = "*";
-	/** Strategy : don't resolve */
+	/** Strategy : will disable resolving if selected */
 	private static final String OPTION_RESOLVER_NONESTRATEGY = "";
-
 
 	public final String commandLine;
 	public final String groupsCommandLine;
@@ -158,32 +157,42 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 		}
 
 		public ListBoxModel doFillEmailResolverItems() {
+
             ListBoxModel items = new ListBoxModel();
+
+            // 1. The following 2 entries are always available, so this parameter doesn't have to be changed whenever resolvers are added or removed
+            items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));
+            items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_anystrategy_label(),OPTION_RESOLVER_ANYSTRATEGY));
+
+            // 2. Adds all found e-mail resolvers as options so the user can select one of them
             ExtensionList<MailAddressResolver> mars = MailAddressResolver.all();
-            items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));	// This entry will disable resolving if selected
             if ( ! mars.isEmpty() ) {
-                items.add(new Option(Messages.ScriptSecurityRealm_EmailResolver_anystrategy_label(),OPTION_RESOLVER_ANYSTRATEGY));	// This entry will use Jenkins's default behavior (calling all found resolvers)
-	            // Adds all found e-mail resolvers as options so the user can select one of them
 	            for (MailAddressResolver mar : mars) {
 	            	// class name is used both as label and value
 	                items.add(mar.getClass().getCanonicalName(),mar.getClass().getName());
 	            }
             }
+
             return items;
         }
 
 		public ListBoxModel doFillNameResolverItems() {
+
             ListBoxModel items = new ListBoxModel();
+
+            // 1. The following 2 entries are always available, so this parameter doesn't have to be changed whenever resolvers are added or removed
+            items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));
+            items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_anystrategy_label(),OPTION_RESOLVER_ANYSTRATEGY));
+
+            // 2. Adds all found name resolvers as options so the user can select one of them
             ExtensionList<UserNameResolver> unrs = UserNameResolver.all();
-            items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_nonestrategy_label(),OPTION_RESOLVER_NONESTRATEGY));	// This entry will disable resolving if selected
             if ( ! unrs.isEmpty() ) {
-                items.add(new Option(Messages.ScriptSecurityRealm_NameResolver_anystrategy_label(),OPTION_RESOLVER_ANYSTRATEGY));	// This entry will use Jenkins's default behavior (calling all found resolvers)
-	            // Adds all found name resolvers as options so the user can select one of them
 	            for (UserNameResolver unr : unrs) {
 	            	// class name is used both as label and value
 	                items.add(unr.getClass().getCanonicalName(),unr.getClass().getName());
 	            }
             }
+
             return items;
         }
 	}
