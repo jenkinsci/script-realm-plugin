@@ -1,13 +1,10 @@
 <div>
-  Delegates the groups resolution to a custom script.
+  If not empty, delegates the groups resolution to a custom script.
   
   <p>
   Each time the authentication is attempted, this script will be invoked with the username in the 'U' environment variable.
-  If the script returns exit code 0, the output will be tokenized by the delimiter (default: ',')
-  to create a group with each token.
+  If the script returns exit code 0, the output will be tokenized by the delimiter to create a group with each token.
   </p>
 
-  <p>
   In case of failure, the output from the process will be reported in the exception message.
-  </p>
 </div>

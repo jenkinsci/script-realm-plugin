@@ -146,7 +146,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 	public static final class DescriptorImpl extends Descriptor<SecurityRealm> {
 
 		public String getDisplayName() {
-			return "Authenticate via custom script";
+			return Messages.ScriptSecurityRealm_displayName();
 		}
 
 		public String getDefaultEmailResolver() {
