@@ -95,7 +95,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 		}
 		this.emailResolver = emailResolver;
 		this.nameResolver = nameResolver;
-		LOGGER.log(Level.FINE, "Configured with : commandLine=[{0}] groupsCommandLine=[{1}] groupsDelimiter=[{2}] emailResolver=[{3}] nameResolver=[{4}]", new Object[]{commandLine,groupsCommandLine,groupsDelimiter,emailResolver,nameResolver});
+		LOGGER.log(Level.CONFIG, "Configured with : commandLine=[{0}] groupsCommandLine=[{1}] groupsDelimiter=[{2}] emailResolver=[{3}] nameResolver=[{4}]", new Object[]{commandLine,groupsCommandLine,groupsDelimiter,emailResolver,nameResolver});
 	}
 
 	protected UserDetails authenticate(String username, String password) throws AuthenticationException {
@@ -109,7 +109,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 			if (isWindows()) {
 				overrides.put("SystemRoot", System.getenv("SystemRoot"));
 			}
-			LOGGER.log(Level.FINE,"Executing command with U=[{0}], P=[{1}]", new Object[]{username,password});
+			LOGGER.log(Level.FINER,"Executing command with U=[{0}], P=[*masked*]", username);
 			if (launcher.launch().cmds(QuotedStringTokenizer.tokenize(commandLine)).stdout(new NullOutputStream()).envs(overrides).join() != 0) {
 				throw new BadCredentialsException(out.toString());
 			}
@@ -198,7 +198,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 	}
 
 	protected GrantedAuthority[] loadGroups(String username) throws AuthenticationException {
-		LOGGER.log(Level.FINE,"Loading groups from command for {0}", new Object[]{username});
+		LOGGER.log(Level.FINER,"Loading groups from command for {0}", new Object[]{username});
 		try {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(AUTHENTICATED_AUTHORITY);
@@ -243,12 +243,12 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
         if ( !OPTION_RESOLVER_NONESTRATEGY.equals(nameResolver) ) {
         	String fullname = null;
         	if ( OPTION_RESOLVER_ANYSTRATEGY.equals(nameResolver) ) {
-        		LOGGER.log(Level.FINE,"Calling any registered UserNameResolver for {0}",new Object[]{user});
+        		LOGGER.log(Level.FINER,"Calling any registered UserNameResolver for {0}",new Object[]{user});
         		fullname = UserNameResolver.resolve(user);
         	} else {
                 for (UserNameResolver unr : UserNameResolver.all()) {
                 	if ( unr.getClass().getName().equals(nameResolver) ) {
-                		LOGGER.log(Level.FINE,"Calling resolver {0} for {1}",new Object[]{nameResolver,user});
+                		LOGGER.log(Level.FINER,"Calling resolver {0} for {1}",new Object[]{nameResolver,user});
                 		fullname = unr.findNameFor(user);
                 		break;
                 	}
@@ -262,7 +262,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
         		LOGGER.log(Level.FINE,"Null or empty user name : not updating it");
         	}
         } else {
-        	LOGGER.log(Level.FINE,"None strategy : not updating the user's name");
+        	LOGGER.log(Level.FINER,"None strategy : not updating the user's name");
         }
 
         if ( !OPTION_RESOLVER_NONESTRATEGY.equals(emailResolver) ) {
@@ -270,12 +270,12 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
             if (existing==null || !existing.hasExplicitlyConfiguredAddress()) {
 	        	String email = null;
 	        	if ( OPTION_RESOLVER_ANYSTRATEGY.equals(emailResolver) ) {
-	        		LOGGER.log(Level.FINE,"Calling any registered MailAddressResolver for {0}",new Object[]{user});
+	        		LOGGER.log(Level.FINER,"Calling any registered MailAddressResolver for {0}",new Object[]{user});
 	        		email = MailAddressResolver.resolve(user);
 	        	} else {
 	                for (MailAddressResolver mar : MailAddressResolver.all()) {
 	                	if ( mar.getClass().getName().equals(emailResolver) ) {
-	                		LOGGER.log(Level.FINE,"Calling resolver {0} for {1}",new Object[]{emailResolver,user});
+	                		LOGGER.log(Level.FINER,"Calling resolver {0} for {1}",new Object[]{emailResolver,user});
 	                		email = mar.findMailAddressFor(user);
 	                		break;
 	                	}
@@ -296,7 +296,7 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
             	LOGGER.log(Level.FINE,"An e-mail has already been set up by the user : not updating it");
             }
         } else {
-        	LOGGER.log(Level.FINE,"None strategy : not updating the e-mail");
+        	LOGGER.log(Level.FINER,"None strategy : not updating the e-mail");
         }
     }
 
