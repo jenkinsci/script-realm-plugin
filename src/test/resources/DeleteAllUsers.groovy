@@ -13,5 +13,5 @@ for ( userInfo in Jenkins.instance.getPeople().users ) {
 }
 
 for ( userInfo in Jenkins.instance.getPeople().users ) {
-    println(userInfo.getUser())
+    println(userInfo.getUser()+"\n")
 }
