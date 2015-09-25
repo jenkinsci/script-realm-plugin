@@ -8,10 +8,10 @@ import jenkins.security.*
 
 for ( userInfo in Jenkins.instance.getPeople().users ) {
     User user = userInfo.getUser()
-    print("Deleting user "+user)
+    println("Deleting user "+user)
     user.delete()
 }
 
 for ( userInfo in Jenkins.instance.getPeople().users ) {
-    println(userInfo.getUser()+"\n")
+    println(userInfo.getUser())
 }

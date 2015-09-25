@@ -252,6 +252,8 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
                 		fullname = unr.findNameFor(user);
                 		break;
                 	}
+                }
+                if ( fullname == null ) {
             		LOGGER.log(Level.WARNING,"Resolver {0} not found : name not updated",new Object[]{nameResolver});
                 }
         	}
@@ -279,7 +281,9 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 	                		email = mar.findMailAddressFor(user);
 	                		break;
 	                	}
-                		LOGGER.log(Level.WARNING,"Resolver {0} not found : e-mail not updated",new Object[]{emailResolver});
+	                }
+	                if ( email == null ) {
+	                	LOGGER.log(Level.WARNING,"Resolver {0} not found : e-mail not updated",new Object[]{emailResolver});
 	                }
 	        	}
 	        	if ( StringUtils.isNotBlank(email) ) {
