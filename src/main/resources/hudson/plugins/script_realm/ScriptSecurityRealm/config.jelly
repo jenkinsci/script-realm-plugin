@@ -31,4 +31,10 @@ THE SOFTWARE.
   <f:entry title="${%Groups Delimiter}" help="/plugin/script-realm/help-groupsDelimiter.html">
     <f:textbox field="groupsDelimiter" default="," />
   </f:entry>
+  <f:entry field="emailResolver" title="${%Email resolver}" help="/plugin/script-realm/help-emailResolver.html">
+    <f:select default="${descriptor.defaultEmailResolver()}" />
+  </f:entry>
+  <f:entry field="nameResolver" title="${%Name resolver}" help="/plugin/script-realm/help-nameResolver.html">
+    <f:select default="${descriptor.defaultNameResolver()}" />
+  </f:entry>
 </j:jelly>

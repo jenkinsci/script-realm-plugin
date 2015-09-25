@@ -3,11 +3,13 @@
   a custom authentication scheme, but don't want to write your own plugin.
 
   <p>
-  Each time the authentication is attemped (which is once per session),
+  Each time the authentication is attempted (which is once per session),
   the specified script will be invoked with the username in the 'U' environment variable
   and the password in the 'P' environment variable. If the script returns exit code 0,
   the authentication is considered successful, and otherwise failure.
+  </p>
 
   <p>
   In case of the failure, the output from the process will be reported in the exception message.
+  </p>
 </div>
