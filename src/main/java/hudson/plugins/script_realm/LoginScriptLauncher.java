@@ -12,6 +12,10 @@ import hudson.model.TaskListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * This launcher does not expand the given environment variables - this is
@@ -23,6 +27,9 @@ import java.io.IOException;
  * 
  */
 public class LoginScriptLauncher extends LocalLauncher {
+
+	private static final String CLASSNAME = LoginScriptLauncher.class.getName();
+	private static final Logger LOGGER = Logger.getLogger(CLASSNAME);
 
 	public LoginScriptLauncher(TaskListener listener) {
 		super(listener);
@@ -40,7 +47,13 @@ public class LoginScriptLauncher extends LocalLauncher {
 			jobCmd[idx] = jobEnv.expand(ps.cmds().get(idx));
 		}
 
-		return new hudson.Proc.LocalProc(jobCmd, Util.mapToEnv(jobEnv), ps.stdin(), ps.stdout(), ps.stderr(), toFile(ps.pwd()));
+		try {
+			return new hudson.Proc.LocalProc(jobCmd, Util.mapToEnv(jobEnv), ps.stdin(), ps.stdout(), ps.stderr(), toFile(ps.pwd()));
+		} catch ( IOException e ) {
+			// logs useful details about the command being run like variables as they were replaced
+			LOGGER.log(Level.SEVERE, String.format("Error while executing command %s",Arrays.toString(jobCmd)), e);
+			throw e;
+		}
 	}
 
 	private File toFile(FilePath f) {
