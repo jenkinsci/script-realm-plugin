@@ -72,9 +72,9 @@ public class ScriptSecurityRealm extends AbstractPasswordBasedSecurityRealm {
 	private static final Logger LOGGER = Logger.getLogger(ScriptSecurityRealm.class.getName());
 
 	/** Strategy : call the global <tt>resolve</tt> method (use Jenkins's default behavior, i.e. calling all found resolvers) */
-	private static final String OPTION_RESOLVER_ANYSTRATEGY = "*";
+	private static final String OPTION_RESOLVER_ANYSTRATEGY = ".any";
 	/** Strategy : will disable resolving if selected */
-	private static final String OPTION_RESOLVER_NONESTRATEGY = "";
+	private static final String OPTION_RESOLVER_NONESTRATEGY = ".none";
 
 	public final String commandLine;
 	public final String groupsCommandLine;
