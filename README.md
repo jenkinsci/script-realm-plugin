@@ -10,8 +10,8 @@ Find more at https://wiki.jenkins-ci.org/display/JENKINS/Script+Security+Realm.
 Resolving e-mail and full name
 ------------------------------
 
-In order to display e-mail and full name in the authenticated users' page, this plugin triggers any `MailAddressResolver` and `UserNameResolver` installed on the Jenkins instance.
-You may disable resolution or use a specific resolver for each of them.
+In order to display e-mail and full name in the authenticated users' page, this plugin can trigger any `MailAddressResolver` and `UserNameResolver` installed on the Jenkins instance.
+You may leave resolution disabled or use a specific resolver for each of them.
 
 For instance, the [LDAP Email Plugin](https://wiki.jenkins-ci.org/display/JENKINS/LDAP+Email+Plugin) provides a `MailAddressResolver`.
 
