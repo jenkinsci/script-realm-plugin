@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <f:entry title="${%Login Command}">
+  <f:entry title="${%Login Command}" help="/plugin/script-realm/help-commandLine.html">
     <f:textbox field="commandLine" />
   </f:entry>
   <f:entry title="${%Groups Command}" help="/plugin/script-realm/help-groupsCommandLine.html">
@@ -30,5 +30,11 @@ THE SOFTWARE.
   </f:entry>
   <f:entry title="${%Groups Delimiter}" help="/plugin/script-realm/help-groupsDelimiter.html">
     <f:textbox field="groupsDelimiter" default="," />
+  </f:entry>
+  <f:entry field="emailResolver" title="${%Email resolver}" help="/plugin/script-realm/help-emailResolver.html">
+    <f:select default="${descriptor.defaultEmailResolver()}" />
+  </f:entry>
+  <f:entry field="nameResolver" title="${%Name resolver}" help="/plugin/script-realm/help-nameResolver.html">
+    <f:select default="${descriptor.defaultNameResolver()}" />
   </f:entry>
 </j:jelly>
